@@ -87,7 +87,7 @@ bas, haut = intervalle_fluc(p_pour, 1000, zc)
 compte_pour = 0
 for x in Pour_100:
     if bas <= x / 1000 <= haut:
-        compte += 1
+        compte_pour += 1
 print("Échantillons dans l'intervalle POUR :", compte_pour, "sur 100")
 compte_contre = 0
 for x in Contre_100:
@@ -99,53 +99,45 @@ for x in Sans_op_100:
     if bas_sans_op <= x / 1000 <= haut_sans_op:
         compte_sans_op += 1
 print("Échantillons dans l'intervalle SANS OPINION :", compte_sans_op, "sur 100")
+
 # # Question 2 : Théorie de l'estimation (intervalles de confiance)
 # # L'estimation se base sur l'effectif.
-# print("Question 2")
-# echant_1 = list(donnees_100.iloc[0])
-# fq_POUR_1 = (echant_1[0] / sum(echant_1))
-# fq_CONTRE_1 = (echant_1[1] / sum(echant_1))
-# fq_SANS_OP_1 = (echant_1[2] / sum(echant_1))
-# print("Echantillon 1 :", echant_1)
-# print("Fréquence opinion 'pour', l'échantillon 1 :", fq_POUR_1)
-# print("Fréquence opinion 'contre', l'échantillon 1 :", fq_CONTRE_1)
-# print("Fréquence opinion 'sans opinion', l'échantillon 1 :", fq_SANS_OP_1)
-# ## Intervalles de confiance
-# bas_POUR_1, haut_POUR_1 = intervalle_fluc(fq_POUR_1, sum(echant_1), zc)
-# bas_CONTRE_1, haut_CONTRE_1 = intervalle_fluc(fq_CONTRE_1, sum(echant_1), zc)
-# bas_SANS_OP_1, haut_SANS_OP_1 = intervalle_fluc(fq_SANS_OP_1, sum(echant_1), zc)
-# print("Intervalle de confiance opinion 'pour', échantillon 1 :", "[", round(bas_POUR_1, 2), "; ", round(haut_POUR_1, 2), "]")
-# print("Intervalle de confiance opinion 'contre', échantillon 1 :", "[", round(bas_CONTRE_1, 2), "; ", round(haut_CONTRE_1, 2), "]")
-# print("Intervalle de confiance opinion 'sans opinion', échantillon 1 :", "[", round(bas_SANS_OP_1, 2), "; ", round(haut_SANS_OP_1, 2), "]")
-
+print("Question 2")
+echant_1 = list(donnees_100.iloc[0])
+fq_POUR_1 = (echant_1[0] / sum(echant_1))
+fq_CONTRE_1 = (echant_1[1] / sum(echant_1))
+fq_SANS_OP_1 = (echant_1[2] / sum(echant_1))
+print("Echantillon 1 :", echant_1)
+print("Fréquence opinion 'pour', l'échantillon 1 :", fq_POUR_1)
+print("Fréquence opinion 'contre', l'échantillon 1 :", fq_CONTRE_1)
+print("Fréquence opinion 'sans opinion', l'échantillon 1 :", fq_SANS_OP_1)
+## Intervalles de confiance
+bas_POUR_1, haut_POUR_1 = intervalle_fluc(fq_POUR_1, sum(echant_1), zc)
+bas_CONTRE_1, haut_CONTRE_1 = intervalle_fluc(fq_CONTRE_1, sum(echant_1), zc)
+bas_SANS_OP_1, haut_SANS_OP_1 = intervalle_fluc(fq_SANS_OP_1, sum(echant_1), zc)
+print("Intervalle de confiance opinion 'pour', échantillon 1 :", "[", round(bas_POUR_1, 2), "; ", round(haut_POUR_1, 2), "]")
+print("Intervalle de confiance opinion 'contre', échantillon 1 :", "[", round(bas_CONTRE_1, 2), "; ", round(haut_CONTRE_1, 2), "]")
+print("Intervalle de confiance opinion 'sans opinion', échantillon 1 :", "[", round(bas_SANS_OP_1, 2), "; ", round(haut_SANS_OP_1, 2), "]")
 # # print("Résultat sur le calcul d'un intervalle de confiance")
 
 # # Question 3 : Théorie de la décision (tests d'hypothèse)
 # # La décision se base sur la notion de risques alpha et bêta.
 # # Comme à la séance précédente, l'ensemble des tests se trouve au lien : https://docs.scipy.org/doc/scipy/reference/stats.html
-# print("Question 3")
-# test_1 = ouvrirUnFichier("./data/Loi-normale-Test-1.csv")
-# test_2 = ouvrirUnFichier("./data/Loi-normale-Test-2.csv")
-# # print(test_1.head())
-# # print(test_1.columns)
-# # print(test_2.head())
-# # print(test_2.columns)
-# resultat_1 = scipy.stats.shapiro(test_1["Test"])
-# resultat_2 = scipy.stats.shapiro(test_2["Test"])
-# print("Shapiro Test 1 :", resultat_1)
-# print("Shapiro Test 2 :", resultat_2)
-# print("p-value Test 1 :", resultat_1[1])
-# print("p-value Test 2 :", resultat_2[1])
-
+print("Question 3")
+test_1 = ouvrirUnFichier("./data/Loi-normale-Test-1.csv")
+test_2 = ouvrirUnFichier("./data/Loi-normale-Test-2.csv")
+# print(test_1.head())
+# print(test_1.columns)
 # print(test_2.head())
 # print(test_2.columns)
-# print(test_2["Test"].describe())
-# print(test_1["Test"].describe())
-# print(test_1["Test"].skew())
-# print(test_1["Test"].kurtosis())
-# print(test_1["Test"].value_counts())
-# print(test_2["Test"].value_counts())
-# # print("Théorie de la décision")
+resultat_1 = scipy.stats.shapiro(test_1["Test"])
+resultat_2 = scipy.stats.shapiro(test_2["Test"])
+print("Shapiro Test 1 :", resultat_1)
+print("Shapiro Test 2 :", resultat_2)
+
+print(test_1["Test"].value_counts())
+print(test_2["Test"].value_counts())
+# print("Théorie de la décision")
 
 # # # Question bonus
 # # print("Question bonus")
